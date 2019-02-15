@@ -1,4 +1,5 @@
 source 'https://rubygems.org' do
-    gem 'rb_webcam'
+    gem 'ruby-opencv'
     gem 'telegram-bot-ruby'
+    gem 'pry'
 end
