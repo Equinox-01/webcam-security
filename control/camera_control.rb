@@ -10,11 +10,7 @@ module Control
     end
 
     def image
-      raise NotImplementedError # TODO: Do we need that method here ?
-    end
-
-    def save_on_disk(path)
-      @capture.query.save("#{path}/image_#{Time.now.to_i}.png")
+      @capture.query
     end
 
     def destruct
