@@ -1,10 +1,12 @@
 Dir[File.join('.', '**/*.rb')].each { |f| require f }
 
 def main
+  cam_number = 0
+  cam_number = ARGV[0].to_i unless ARGV.empty?
   telegram_bot = Control::TelegramBot.new
-  cc = Control::Camera.new
+  cc = Control::Camera.new cam_number
   tmp = cc.image
-  puts 'System stand by ...'
+  puts "System standby from #{Time.now}"
   loop do
     next unless telegram_bot.start_message_received?
 
