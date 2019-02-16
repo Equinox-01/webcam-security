@@ -1,11 +1,11 @@
-require 'opencv'
-include OpenCV
+require 'pry'
+require 'require_all'
+require_all './'
 
 def main
-  capture = OpenCV::CvCapture.open
-  sleep 1 # Warming up the webcam
-  capture.query.save("image.jpg")
-  capture.close
+  cc = Control::Camera.new
+  # binding.pry
+  cc.destruct
 end
 
 main
