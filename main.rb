@@ -1,15 +1,21 @@
-require 'pry'
-require 'require_all'
-require_all './'
+Dir[File.join('.', '**/*.rb')].each { |f| require f }
 
 def main
+  telegram_bot = Control::TelegramBot.new
   cc = Control::Camera.new
   tmp = cc.image
-  while 1
+  puts 'System stand by ...'
+  loop do
+    next unless telegram_bot.start_message_received?
+
     current_image = cc.image
     if Algorithm.compare_images(current_image, tmp)
-      puts 'kek' # TODO: Change to telegram-bot message with image
-      current_image.save("images/security_breach/image_#{Time.now.to_i}.png")
+      message = "Security breach detected - #{Time.now}"
+      filepath = "images/security_breach/image_#{Time.now.to_i}.png"
+      current_image.save(filepath)
+      telegram_bot.send_message(message, filepath)
+      puts message
+      telegram_bot.stop_connection
     end
     sleep 3
   end
