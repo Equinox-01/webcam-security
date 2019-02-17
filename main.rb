@@ -11,7 +11,7 @@ def main
     next unless telegram_bot.start_message_received?
 
     current_image = cc.image
-    if Algorithm.compare_images(current_image, tmp)
+    unless Algorithm.compare_images(current_image, tmp)
       message = "Security breach detected - #{Time.now}"
       filepath = "images/security_breach/image_#{Time.now.to_i}.png"
       current_image.save(filepath)
@@ -19,6 +19,7 @@ def main
       puts message
       telegram_bot.stop_connection
     end
+    tmp = current_image
     sleep 3
   end
   cc.destruct
