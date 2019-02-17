@@ -20,7 +20,6 @@ def main
       telegram_bot.stop_connection
     end
     tmp = current_image
-    sleep 3
   end
   cc.destruct
 end

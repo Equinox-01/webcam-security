@@ -21,7 +21,12 @@ module Control
     def start_message_received?
       return true if @is_started
 
-      @bot.listen { |message| return true if message.text == START_COMMAND && message.chat.id == YAML.load_file('secrets.yml')['USER_GUID']}
+      @bot.listen do |message|
+        if message.text == START_COMMAND && message.chat.id == YAML.load_file('secrets.yml')['USER_GUID']
+          @is_started = true
+          return @is_started
+        end
+      end
     end
 
     def stop_connection
