@@ -1,6 +1,7 @@
 require 'opencv'
 
 module Control
+  # Control all function for webcam.
   class Camera
     include OpenCV
 
